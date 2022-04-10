@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:restaurant_app/common/navigation.dart';
 import 'package:restaurant_app/data/model/list_restaurant.dart';
-import 'package:restaurant_app/ui/restaurant_detail_page.dart';
 import 'package:rxdart/rxdart.dart';
 
 final selectNotificationSubject = BehaviorSubject<String>();
@@ -15,6 +14,8 @@ class NotificationHelper {
   NotificationHelper._internal() {
     _instance = this;
   }
+
+  late int randomNumber;
 
   factory NotificationHelper() => _instance ?? NotificationHelper._internal();
 
@@ -37,8 +38,6 @@ class NotificationHelper {
       if (payload != null) {
         // ignore: avoid_print
         print('notification payload: ' + payload);
-        var data = Restaurant.fromJson(json.decode(payload));
-        await Navigation.intentWithData(RestaurantDetailPage.routeName, data);
       }
       selectNotificationSubject.add(payload ?? 'empty payload');
     });
@@ -47,7 +46,6 @@ class NotificationHelper {
   Future<void> showNotification(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
       Restaurantlist restaurants) async {
-    var restaurant = restaurants.restaurants[Random().nextInt(restaurants.restaurants.length)];
     var _channelId = "1";
     var _channelName = "channel_01";
     var _channelDescription = "restaurant app channel";
@@ -65,19 +63,20 @@ class NotificationHelper {
         iOS: iOSPlatfromChannelSpecifics);
 
     var titleNotification = "<b>Restaurant App<b>";
-    var titleRestaurant = "Buy! voucher discount ${Random().nextInt(70)}% for food" + restaurant.name + " in " + restaurant.city;
+    var restaurantLength = restaurants.restaurants.length;
+    randomNumber = Random().nextInt(restaurantLength - 1);
+    var titleRestaurant = restaurants.restaurants[randomNumber].name;
 
     await flutterLocalNotificationsPlugin.show(
         0, titleNotification, titleRestaurant, platformChannelSpecifics,
-        payload: json.encode(restaurant.toJson()));
+        payload: json.encode(restaurants.restaurants[randomNumber].toJson()));
   }
 
   void configureSelectNotificationSubject(String route) {
     selectNotificationSubject.stream.listen(
       (String payload) async {
-        var data = Restaurantlist.fromJson(json.decode(payload));
-        var article = data.restaurants[0];
-        Navigation.intentWithData(route, article);
+        var data = Restaurant.fromJson(json.decode(payload));
+        Navigation.intentWithData(route,data.id.toString());
       },
     );
   }

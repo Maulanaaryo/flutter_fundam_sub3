@@ -1,12 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
+import 'package:http/http.dart' as http;
+import 'package:mockito/annotations.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/model/list_restaurant.dart';
 import 'package:restaurant_app/provider/list_provider.dart';
-import 'restaurant_list_test.mocks.dart';
-
+import 'list_restaurant_test.mocks.dart';
 
 @GenerateMocks([http.Client])
 void main() {
