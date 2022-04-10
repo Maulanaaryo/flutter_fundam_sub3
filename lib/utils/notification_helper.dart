@@ -18,8 +18,6 @@ class NotificationHelper {
 
   factory NotificationHelper() => _instance ?? NotificationHelper._internal();
 
-  late int randomNumber;
-
   Future<void> initNotifications(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     var initializationSettingAndroid =
@@ -77,8 +75,9 @@ class NotificationHelper {
   void configureSelectNotificationSubject(String route) {
     selectNotificationSubject.stream.listen(
       (String payload) async {
-        var data = Restaurant.fromJson(json.decode(payload));
-        Navigation.intentWithData(route, data);
+        var data = Restaurantlist.fromJson(json.decode(payload));
+        var article = data.restaurants[0];
+        Navigation.intentWithData(route, article);
       },
     );
   }

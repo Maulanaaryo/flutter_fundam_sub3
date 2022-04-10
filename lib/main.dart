@@ -1,11 +1,11 @@
 // ignore_for_file: deprecated_member_use
 import 'dart:io';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/navigation.dart';
+import 'package:restaurant_app/common/style.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/db/database_helper.dart';
 import 'package:restaurant_app/data/preferences/preferences_helper.dart';
@@ -73,18 +73,10 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Restaurant App',
             debugShowCheckedModeBanner: false,
-            theme: provider.themeData,
-            builder: (context, child) {
-              return CupertinoTheme(
-                data: CupertinoThemeData(
-                  brightness:
-                      provider.isDarkTheme ? Brightness.dark : Brightness.light,
-                ),
-                child: Material(
-                  child: child,
-                ),
-              );
-            },
+            theme: ThemeData(appBarTheme: const AppBarTheme(
+              color: secondaryColor,
+            ),
+            ),
             navigatorKey: navigatorKey,
             initialRoute: SplashScreen.routeName,
             routes: {
@@ -93,7 +85,7 @@ class MyApp extends StatelessWidget {
               RestaurantSearchPage.routeName: (context) =>
                   const RestaurantSearchPage(),
               RestaurantDetailPage.routeName: (context) => RestaurantDetailPage(
-                    id: ModalRoute.of(context)!.settings.arguments as String,
+                    id: ModalRoute.of(context)?.settings.arguments as String,
                   ),
             },
           );
