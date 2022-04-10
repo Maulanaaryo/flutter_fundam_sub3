@@ -3,8 +3,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/model/detail_restaurant.dart';
+import 'package:restaurant_app/utils/result_state.dart';
 
-enum ResultState { Loading, NoHasdata, HasData, HasError }
 
 class DetailProvider extends ChangeNotifier {
   final ApiService apiDetailService;
@@ -28,7 +28,7 @@ class DetailProvider extends ChangeNotifier {
       notifyListeners();
       final restaurantDetail = await apiDetailService.restaurantDetail(id);
       if (restaurantDetail.restaurant.id.isEmpty) {
-        _state = ResultState.NoHasdata;
+        _state = ResultState.NoData;
         notifyListeners();
         return _message = 'Data no found';
       } else {
@@ -37,7 +37,7 @@ class DetailProvider extends ChangeNotifier {
         return _restaurantdetail = restaurantDetail;
       }
     } catch (e) {
-      _state = ResultState.HasError;
+      _state = ResultState.Error;
       notifyListeners();
       return _message = 'Error --> $e';
     }

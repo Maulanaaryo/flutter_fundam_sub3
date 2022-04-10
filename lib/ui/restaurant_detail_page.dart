@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/provider/detail_provider.dart';
+import 'package:restaurant_app/utils/result_state.dart';
 import 'package:restaurant_app/widgets/detail_screen.dart';
 
 class RestaurantDetailPage extends StatelessWidget {
@@ -13,7 +14,7 @@ class RestaurantDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return ChangeNotifierProvider<DetailProvider>(
       create: (_) => DetailProvider(apiDetailService: ApiService(), id: id),
       child: Consumer<DetailProvider>(
         builder: (context, state, _) {
@@ -21,9 +22,9 @@ class RestaurantDetailPage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           } else if (state.state == ResultState.HasData) {
             return DetailScreen(restaurant: state.result!.restaurant);
-          } else if (state.state == ResultState.NoHasdata) {
+          } else if (state.state == ResultState.NoData) {
             return Center(child: Text(state.message));
-          } else if (state.state == ResultState.HasError) {
+          } else if (state.state == ResultState.Error) {
             return Scaffold(
               body: Container(
                 alignment: Alignment.center,

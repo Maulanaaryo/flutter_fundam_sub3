@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/provider/list_provider.dart';
 import 'package:restaurant_app/ui/restaurant_search_page.dart';
+import 'package:restaurant_app/utils/result_state.dart';
 import 'package:restaurant_app/widgets/card_restaurant.dart';
 import 'package:restaurant_app/widgets/platform_widgets.dart';
 
@@ -27,7 +28,7 @@ class RestaurantListPage extends StatelessWidget {
                 return CardRestaurant(restaurant: restaurant);
               },
             );
-          } else if (state.state == ResultState.Nodata) {
+          } else if (state.state == ResultState.NoData) {
             return Center(child: Text(state.message));
           } else if (state.state == ResultState.Error) {
             return Scaffold(

@@ -3,8 +3,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/model/list_restaurant.dart';
+import 'package:restaurant_app/utils/result_state.dart';
 
-enum ResultState { Loading, Nodata, HasData, Error }
 
 class ListProvider extends ChangeNotifier {
   final ApiService apiService;
@@ -27,7 +27,7 @@ class ListProvider extends ChangeNotifier {
       notifyListeners();
       final restaurant = await apiService.restaurantList();
       if (restaurant.restaurants.isEmpty) {
-        _state = ResultState.Nodata;
+        _state = ResultState.NoData;
         notifyListeners();
         return _message = 'Data not found';
       } else {
