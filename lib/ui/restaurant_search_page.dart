@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/provider/search_provider.dart';
@@ -61,7 +62,7 @@ class _RestaurantSearchPageState extends State<RestaurantSearchPage> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => SearchRestaurantProvider(
-        apiService: ApiService(),
+        apiService: ApiService(Client()),
       ),
       child: Consumer<SearchRestaurantProvider>(builder: (context, state, _) {
         return Scaffold(

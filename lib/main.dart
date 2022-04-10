@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/navigation.dart';
 import 'package:restaurant_app/common/style.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => ListProvider(
-            apiService: ApiService(),
+            apiService: ApiService(Client()),
           ),
         ),
         ChangeNotifierProvider(
@@ -73,9 +74,10 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Restaurant App',
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(appBarTheme: const AppBarTheme(
-              color: secondaryColor,
-            ),
+            theme: ThemeData(
+              appBarTheme: const AppBarTheme(
+                color: secondaryColor,
+              ),
             ),
             navigatorKey: navigatorKey,
             initialRoute: SplashScreen.routeName,

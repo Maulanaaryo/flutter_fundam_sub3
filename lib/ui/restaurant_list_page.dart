@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/provider/list_provider.dart';
@@ -14,7 +15,7 @@ class RestaurantListPage extends StatelessWidget {
 
   Widget _buildList(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ListProvider(apiService: ApiService()),
+      create: (_) => ListProvider(apiService: ApiService(Client())),
       child: Consumer<ListProvider>(
         builder: (context, state, _) {
           if (state.state == ResultState.Loading) {

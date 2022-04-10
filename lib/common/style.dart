@@ -8,10 +8,10 @@ const Color favoriteColor = Color(0xFFFF1744);
 
 ThemeData lightTheme = ThemeData(
   colorScheme: ThemeData.light().colorScheme.copyWith(
-    primary: primaryColor,
-    onPrimary: Colors.black,
-    secondary: secondaryColor,
-  ),
+        primary: primaryColor,
+        onPrimary: Colors.black,
+        secondary: secondaryColor,
+      ),
   scaffoldBackgroundColor: Colors.white,
   visualDensity: VisualDensity.adaptivePlatformDensity,
   appBarTheme: const AppBarTheme(elevation: 0),
@@ -19,24 +19,25 @@ ThemeData lightTheme = ThemeData(
     selectedItemColor: secondaryColor,
     unselectedItemColor: Colors.grey,
   ),
-  elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(
-    primary: secondaryColor,
-    textStyle: const TextStyle(),
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(0),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: secondaryColor,
+      textStyle: const TextStyle(),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(0),
+        ),
       ),
     ),
-  ),
   ),
 );
 
 ThemeData darkTheme = ThemeData.dark().copyWith(
   colorScheme: ThemeData.dark().colorScheme.copyWith(
-    primary: darkPrimaryColor,
-    onPrimary: Colors.black,
-    secondary: darkSecondaryColor,
-  ),
+        primary: darkPrimaryColor,
+        onPrimary: Colors.black,
+        secondary: darkSecondaryColor,
+      ),
   visualDensity: VisualDensity.adaptivePlatformDensity,
   appBarTheme: const AppBarTheme(elevation: 0),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -49,7 +50,8 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
       onPrimary: Colors.white,
       textStyle: const TextStyle(),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(0),
+        borderRadius: BorderRadius.all(
+          Radius.circular(0),
         ),
       ),
     ),
